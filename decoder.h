@@ -3,6 +3,7 @@
 
 #include "decoder.c"
 
-int utf8_to_codepoint(const char *utf8_char);
+int utf8_to_codepoint(const unsigned char *s, int *bytes_consumed);
+int* string_decoder(const char* utf8_string, int *out_length);
 
 #endif
