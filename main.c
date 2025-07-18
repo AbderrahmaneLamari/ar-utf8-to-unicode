@@ -1,26 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "decoder.h"
-int main(int argc, char *argv[]) {
-    
-    if(argc < 2) {
-        printf("Usage: %s <utf8_string>\n", argv[0]);
-        return 1;
-    }
-    const char *str = argv[1];
-    int length = 0;
 
 
-    int *codepoints = string_decoder(str, &length);
-    if (!codepoints) {
-        printf("Error decoding string.\n");
+int main() {
+    FILE *file = fopen("quran-simple.txt", "r");
+    FILE* output_file = fopen("decoded_output.txt", "w");
+    if (!file) {
+        perror("Failed to open file");
         return 1;
     }
 
-    for (int i = 0; i < length; i++) {
-        printf("U+%04X\n", codepoints[i]);
+    char line[4096]; // Buffer to hold each line (adjust size if needed)
+
+    while (fgets(line, sizeof(line), file)) {
+        // Remove trailing newline if present
+        // line[strcspn(line, "\n")] = '\0';
+
+        // Now you can process the line
+        decode_line(line, output_file);
     }
 
-    free(codepoints);
+    fclose(file);
     return 0;
 }

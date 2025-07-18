@@ -5,5 +5,6 @@
 
 int utf8_to_codepoint(const unsigned char *s, int *bytes_consumed);
 int* string_decoder(const char* utf8_string, int *out_length);
+void decode_line(const char *line, FILE* file); 
 
 #endif
